@@ -41,6 +41,6 @@ app.get('/video', function(req, res) {
   }
 });
 
-app.listen(50023, () => {
+app.listen(50013, () => {
   console.log("Server running");
 });
