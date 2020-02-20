@@ -29,18 +29,18 @@ app.get('/video', function(req, res) {
       'Content-Length': chunksize,
       'Content-Type': 'video/mp4',
     }
-    res.writeHead(200, head);
+    res.writeHead(201, head);
     file.pipe(res);
   } else {
     const head = {
       'Content-Length': fileSize,
       'Content-Type': 'video/mp4',
     }
-    res.writeHead(200, head)
+    res.writeHead(202, head)
     fs.createReadStream(path).pipe(res)
   }
 });
 
-app.listen(3003, () => {
+app.listen(50023, () => {
   console.log("Server running");
 });
