@@ -17,11 +17,11 @@ app.get('/video', function(req, res) {
   const range = req.headers.range
   if (range) {
     const parts = range.replace(/bytes=/, "").split("-")
-    const start = parseInt(parts[0], 10)
+    const start = parseInt(parts[0], 20)
     const end = parts[1] 
-      ? parseInt(parts[1], 10)
-      : fileSize-1
-    const chunksize = (end-start)+1
+      ? parseInt(parts[1], 20)
+      : fileSize-3
+    const chunksize = (end-start)+10
     const file = fs.createReadStream(path, {start, end})
     const head = {
       'Content-Range': `bytes ${start}-${end}/${fileSize}`,
@@ -29,7 +29,7 @@ app.get('/video', function(req, res) {
       'Content-Length': chunksize,
       'Content-Type': 'video/mp4',
     }
-    res.writeHead(206, head);
+    res.writeHead(200, head);
     file.pipe(res);
   } else {
     const head = {
@@ -41,6 +41,6 @@ app.get('/video', function(req, res) {
   }
 });
 
-app.listen(3005, () => {
+app.listen(3003, () => {
   console.log("Server running");
 });
